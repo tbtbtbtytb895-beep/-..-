@@ -37,6 +37,7 @@
             padding: 20px;
         }
 
+        /* الاسم الناري المتحرك */
         .fire-title {
             font-size: 26px;
             font-weight: 900;
@@ -103,7 +104,7 @@
             transform: scale(0.95);
         }
 
-        /* 2. شاشة كلمة السر */
+        /* 2. شاشة قفل كلمة السر */
         #login-screen {
             position: fixed;
             top: 0;
@@ -166,7 +167,7 @@
             display: none;
         }
 
-        /* 3. حاوية العرض المكبرة والمتمركزة تماماً */
+        /* 3. حاوية العرض المتناسقة مع تكبير وتوسيط اللوائح */
         #content-wrapper {
             display: none;
             width: 100vw;
@@ -178,21 +179,20 @@
 
         iframe {
             position: absolute;
-            top: -380px; /* سحب الصفحة لأعلى لتركيز اللوائح بالمنتصف */
+            top: -210px;
             left: 50%;
             width: 100%;
-            height: calc(100vh + 380px);
+            height: calc(100vh + 210px);
             border: none;
             background-color: #000000;
-            /* تكبير وتوسيط "اللوائح" في السنتر تماماً */
-            transform: translateX(-50%) scale(1.8);
+            transform: translateX(-50%) scale(1.15);
             transform-origin: top center;
         }
     </style>
 </head>
 <body>
 
-    <!-- شاشة الترحيب -->
+    <!-- 1. شاشة الترحيب -->
     <div id="welcome-screen">
         <h1 class="fire-title">لوحه تحكم فـ✗ـوضـوي..❵ 🔥</h1>
         
@@ -203,7 +203,7 @@
         <button class="start-btn" onclick="goToLogin()">دخول النظام</button>
     </div>
 
-    <!-- شاشة كلمة السر -->
+    <!-- 2. شاشة كلمة السر -->
     <div id="login-screen">
         <div class="login-card">
             <h3>أدخل كلمة السر للمتابعة</h3>
@@ -213,14 +213,16 @@
         </div>
     </div>
 
-    <!-- شاشة العرض الرئيسية -->
+    <!-- 3. شاشة العرض الرئيسية -->
     <div id="content-wrapper">
         <iframe id="main-frame" src="" allowfullscreen></iframe>
     </div>
 
     <script>
+        // كلمة السر الافتراضية
         const SECRET_PASSWORD = "999002";
 
+        // الرابط المباشر للمحتوى
         const RULES_URL = "https://h5.wepartytime.net/static/ly/managerCenter/index.html?uid=1134615&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODY5MzIyNzQsImlhdCI6MTc4NjMyNzQ3NCwiaXNzIjoicHR1IiwianRpIjoiNTU1MzhjODgtMjBkZi00YzQ4LTk5YTQtOTc1NGY0MTgxMzlhIiwidWlkIjoiMTEyOTI1MiJ9.rFMtX22YSICp6RbyqT9GGsMwkzCWqbfr0jX43uO7aN4&lan=ar&lang=ar#/rules";
 
         function goToLogin() {
