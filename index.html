@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اللوائح</title>
+    <title>اللوائح والقوانين</title>
     <style>
-        /* تنسيقات عامة لتغطية كل شيء بالأسود */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body, html { height: 100%; overflow: hidden; background-color: #000; font-family: sans-serif; }
+        body, html { height: 100%; width: 100%; overflow: hidden; background-color: #000; font-family: sans-serif; }
         
         /* شاشة كلمة السر بخلفية سوداء */
         #login-screen {
@@ -24,16 +23,114 @@
             z-index: 9999;
         }
         .login-card {
-            background: #1a1a1a;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(255,255,255,0.1);
+            background: #121212;
+            padding: 35px 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 25px rgba(255,255,255,0.05);
             text-align: center;
             width: 90%;
-            max-width: 400px;
-            border: 1px solid #333;
+            max-width: 380px;
+            border: 1px solid #222;
         }
-        .login-card h2 { margin-bottom: 25px; color: #fff; font-size: 22px; }
+        .login-card h2 { margin-bottom: 20px; color: #fff; font-size: 20px; }
+        .login-card input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 18px;
+            border: 1px solid #333;
+            border-radius: 10px;
+            font-size: 16px;
+            text-align: center;
+            background-color: #1e1e1e;
+            color: #fff;
+        }
+        .login-card input:focus { outline: none; border-color: #5865F2; }
+        .login-card button {
+            width: 100%;
+            padding: 14px;
+            background-color: #5865F2;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .error-msg { color: #ff4d4d; font-size: 14px; margin-top: 12px; display: none; }
+
+        /* حاوية اقتصاص الرأس وإخفاء الجزء العلوي */
+        #content-wrapper {
+            display: none;
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background-color: #000;
+            overflow: hidden;
+        }
+
+        /* حاوية الإطار لإخفاء الشرير والأقسام السفلية */
+        .iframe-container {
+            position: absolute;
+            top: -210px; /* يسحب الصفحة للأعلى لإخفاء قسم الراتب ومركز المديرين */
+            left: 0;
+            width: 100%;
+            height: calc(100vh + 210px);
+            background-color: #000;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background-color: #000;
+            filter: invert(0.9) hue-rotate(180deg); /* تحويل ألوان التطبيق البيضاء إلى المظهر الأسود */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شاشة إدخال كلمة السر -->
+    <div id="login-screen">
+        <div class="login-card">
+            <h2>عرض اللوائح والقوانين</h2>
+            <input type="password" id="password-input" placeholder="أدخل كلمة السر">
+            <button onclick="checkPassword()">دخول</button>
+            <p id="error-msg" class="error-msg">كلمة السر غير صحيحة!</p>
+        </div>
+    </div>
+
+    <!-- عرض اللوائح فقط بخلفية داكنة -->
+    <div id="content-wrapper">
+        <div class="iframe-container">
+            <iframe id="main-frame" src=""></iframe>
+        </div>
+    </div>
+
+    <script>
+        const SECRET_PASSWORD = "1234"; // كلمة السر الخاصة بك
+
+        // رابط اللوائح المباشر
+        const RULES_URL = "https://h5.wepartytime.net/static/ly/managerCenter/index.html?uid=1134615&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODY5MzIyNzQsImlhdCI6MTc4NjMyNzQ3NCwiaXNzIjoicHR1IiwianRpIjoiNTU1MzhjODgtMjBkZi00YzQ4LTk5YTQtOTc1NGY0MTgxMzlhIiwidWlkIjoiMTEyOTI1MiJ9.rFMtX22YSICp6RbyqT9GGsMwkzCWqbfr0jX43uO7aN4&lan=ar&lang=ar#/rules";
+
+        function checkPassword() {
+            const inputVal = document.getElementById('password-input').value;
+            const errorMsg = document.getElementById('error-msg');
+
+            if (inputVal === SECRET_PASSWORD) {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('content-wrapper').style.display = 'block';
+                document.getElementById('main-frame').src = RULES_URL;
+            } else {
+                errorMsg.style.display = 'block';
+            }
+        }
+
+        document.getElementById('password-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') checkPassword();
+        });
+    </script>
+</body>
+</html>
         .login-card input {
             width: 100%;
             padding: 15px;
@@ -98,7 +195,7 @@
 
     <script>
         // ضع كلمة السر التي تريدها هنا
-        const SECRET_PASSWORD = "1234"; 
+        const SECRET_PASSWORD = "12345678"; 
 
         // رابط يوجه مباشرة لتبويب اللوائح ويطلب تفعيل الوضع المعتم عبر المعاملات
         const RULES_URL = "https://h5.wepartytime.net/static/ly/managerCenter/index.html?uid=1134615&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODY5MzIyNzQsImlhdCI6MTc4NjMyNzQ3NCwiaXNzIjoicHR1IiwianRpIjoiNTU1MzhjODgtMjBkZi00YzQ4LTk5YTQtOTc1NGY0MTgxMzlhIiwidWlkIjoiMTEyOTI1MiJ9.rFMtX22YSICp6RbyqT9GGsMwkzCWqbfr0jX43uO7aN4&lan=ar&lang=ar&theme=dark#/rules";
