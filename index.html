@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مركز الإدارة</title>
+    <title>اللوائح</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body, html { height: 100%; font-family: system-ui, -apple-system, sans-serif; background-color: #f4f6f9; }
@@ -34,6 +34,63 @@
             font-size: 16px;
             text-align: center;
         }
+        .login-card button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .login-card button:hover { background-color: #0056b3; }
+        .error-msg { color: #dc3545; font-size: 14px; margin-top: 10px; display: none; }
+
+        /* شاشة عرض اللوائح */
+        #content-screen { display: none; width: 100%; height: 100vh; }
+        iframe { width: 100%; height: 100%; border: none; }
+    </style>
+</head>
+<body>
+
+    <!-- واجهة دخول كلمة السر -->
+    <div id="login-screen">
+        <div class="login-card">
+            <h2>اللوائح والقوانين</h2>
+            <input type="password" id="password-input" placeholder="أدخل كلمة السر">
+            <button onclick="checkPassword()">دخول</button>
+            <p id="error-msg" class="error-msg">كلمة السر غير صحيحة!</p>
+        </div>
+    </div>
+
+    <!-- واجهة عرض اللوائح فقط -->
+    <div id="content-screen">
+        <iframe id="main-frame" src=""></iframe>
+    </div>
+
+    <script>
+        const SECRET_PASSWORD = "1234"; // ضع كلمة السر الخاصة بك هنا
+
+        // رابط يوجه مباشرة لتبويب اللوائح
+        const RULES_URL = "https://h5.wepartytime.net/static/ly/managerCenter/index.html?uid=1134615&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODY5MzIyNzQsImlhdCI6MTc4NjMyNzQ3NCwiaXNzIjoicHR1IiwianRpIjoiNTU1MzhjODgtMjBkZi00YzQ4LTk5YTQtOTc1NGY0MTgxMzlhIiwidWlkIjoiMTEyOTI1MiJ9.rFMtX22YSICp6RbyqT9GGsMwkzCWqbfr0jX43uO7aN4&lan=ar&lang=ar#/rules";
+
+        function checkPassword() {
+            const inputVal = document.getElementById('password-input').value;
+            const errorMsg = document.getElementById('error-msg');
+
+            if (inputVal === SECRET_PASSWORD) {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('content-screen').style.display = 'block';
+                document.getElementById('main-frame').src = RULES_URL;
+            } else {
+                errorMsg.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
         .login-card button {
             width: 100%;
             padding: 12px;
