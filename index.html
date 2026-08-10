@@ -20,7 +20,7 @@
             color: #ffffff;
         }
 
-        /* 1. شاشة الترحيب المزخرفة والملونة */
+        /* 1. شاشة الترحيب */
         #welcome-screen {
             position: fixed;
             top: 0;
@@ -35,7 +35,6 @@
             z-index: 2000;
             text-align: center;
             padding: 20px;
-            animation: fadeIn 1s ease-in-out;
         }
 
         .title-glow {
@@ -74,14 +73,9 @@
             border-radius: 30px;
             cursor: pointer;
             box-shadow: 0 0 15px rgba(255, 0, 127, 0.5);
-            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .start-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* 2. شاشة إدخال كلمة السر */
+        /* 2. شاشة كلمة السر */
         #login-screen {
             position: fixed;
             top: 0;
@@ -103,7 +97,6 @@
             width: 90%;
             max-width: 360px;
             border: 1px solid #222222;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
         }
 
         .login-card h3 {
@@ -125,10 +118,6 @@
             outline: none;
         }
 
-        .login-card input:focus {
-            border-color: #7928ca;
-        }
-
         .login-card button {
             width: 100%;
             padding: 14px;
@@ -148,7 +137,7 @@
             display: none;
         }
 
-        /* 3. حاوية العرض وإعادة ضبط المحتوى */
+        /* 3. حاوية العرض والضبط الدقيق للمكان والحجم */
         #content-wrapper {
             display: none;
             width: 100vw;
@@ -160,20 +149,15 @@
 
         iframe {
             position: absolute;
-            top: -125px; /* رفع الصفحة لإبقاء قسم اللوائح في المنتصف */
-            left: -12%;  /* إزاحة أفقية لضبط مكان تبويب اللوائح في منتصف الشاشة */
-            width: 124%; /* توسيع المساحة لمنع اقتطاع الجوانب */
-            height: calc(100vh + 125px);
+            top: -210px; /* سحب الإطارات العلوية */
+            left: 50%;
+            width: 100%;
+            height: calc(100vh + 210px);
             border: none;
             background-color: #000000;
-            /* تصغير المحتوى قليلاً للتوافق */
-            transform: scale(0.9);
+            /* توزيط الصفحة وتصغير المحتوى بحجم مناسب جداً */
+            transform: translateX(-50%) scale(0.85);
             transform-origin: top center;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
     </style>
 </head>
@@ -206,18 +190,15 @@
     </div>
 
     <script>
-        const SECRET_PASSWORD = "999002"; // يمكنك تغيير كلمة السر هنا
+        const SECRET_PASSWORD = "999002";
 
-        // رابط اللوائح المباشر
         const RULES_URL = "https://h5.wepartytime.net/static/ly/managerCenter/index.html?uid=1134615&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODY5MzIyNzQsImlhdCI6MTc4NjMyNzQ3NCwiaXNzIjoicHR1IiwianRpIjoiNTU1MzhjODgtMjBkZi00YzQ4LTk5YTQtOTc1NGY0MTgxMzlhIiwidWlkIjoiMTEyOTI1MiJ9.rFMtX22YSICp6RbyqT9GGsMwkzCWqbfr0jX43uO7aN4&lan=ar&lang=ar#/rules";
 
-        // الانتقال من شاشة الترحيب لشاشة الباسورد
         function goToLogin() {
             document.getElementById('welcome-screen').style.display = 'none';
             document.getElementById('login-screen').style.display = 'flex';
         }
 
-        // التحقق من كلمة السر وفتح اللوائح
         function checkPassword() {
             const inputVal = document.getElementById('password-input').value.trim();
             const errorMsg = document.getElementById('error-msg');
@@ -225,15 +206,12 @@
             if (inputVal === SECRET_PASSWORD) {
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('content-wrapper').style.display = 'block';
-                
-                // تحميل الرابط في الإطار
                 document.getElementById('main-frame').src = RULES_URL;
             } else {
                 errorMsg.style.display = 'block';
             }
         }
 
-        // دعم زر Enter في الكيبورد
         document.getElementById('password-input').addEventListener('keypress', function (e) {
             if (e.key === 'Enter') checkPassword();
         });
