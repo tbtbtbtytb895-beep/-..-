@@ -6,33 +6,33 @@
     <title>اللوائح والقوانين</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body, html { height: 100%; width: 100%; overflow: hidden; background-color: #000; font-family: sans-serif; }
-        
-        /* شاشة كلمة السر بخلفية سوداء */
-        #login-screen {
+        body, html { 
+            height: 100vh; 
+            background-color: #000; 
+            font-family: system-ui, -apple-system, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background-color: #000;
             color: #fff;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            left: 0;
-            z-index: 9999;
         }
+
         .login-card {
             background: #121212;
             padding: 35px 25px;
             border-radius: 16px;
-            box-shadow: 0 4px 25px rgba(255,255,255,0.05);
+            box-shadow: 0 4px 25px rgba(255,255,255,0.08);
             text-align: center;
             width: 90%;
             max-width: 380px;
             border: 1px solid #222;
         }
-        .login-card h2 { margin-bottom: 20px; color: #fff; font-size: 20px; }
+
+        .login-card h2 { 
+            margin-bottom: 20px; 
+            color: #fff; 
+            font-size: 20px; 
+        }
+
         .login-card input {
             width: 100%;
             padding: 14px;
@@ -43,8 +43,13 @@
             text-align: center;
             background-color: #1e1e1e;
             color: #fff;
+            outline: none;
         }
-        .login-card input:focus { outline: none; border-color: #5865F2; }
+
+        .login-card input:focus { 
+            border-color: #5865F2; 
+        }
+
         .login-card button {
             width: 100%;
             padding: 14px;
@@ -56,54 +61,22 @@
             cursor: pointer;
             font-weight: bold;
         }
-        .error-msg { color: #ff4d4d; font-size: 14px; margin-top: 12px; display: none; }
 
-        /* حاوية اقتصاص الرأس وإخفاء الجزء العلوي */
-        #content-wrapper {
-            display: none;
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            background-color: #000;
-            overflow: hidden;
-        }
-
-        /* حاوية الإطار لإخفاء الشرير والأقسام السفلية */
-        .iframe-container {
-            position: absolute;
-            top: -210px; /* يسحب الصفحة للأعلى لإخفاء قسم الراتب ومركز المديرين */
-            left: 0;
-            width: 100%;
-            height: calc(100vh + 210px);
-            background-color: #000;
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            background-color: #000;
-            filter: invert(0.9) hue-rotate(180deg); /* تحويل ألوان التطبيق البيضاء إلى المظهر الأسود */
+        .error-msg { 
+            color: #ff4d4d; 
+            font-size: 14px; 
+            margin-top: 14px; 
+            display: none; 
         }
     </style>
 </head>
 <body>
 
-    <!-- شاشة إدخال كلمة السر -->
-    <div id="login-screen">
-        <div class="login-card">
-            <h2>عرض اللوائح والقوانين</h2>
-            <input type="password" id="password-input" placeholder="أدخل كلمة السر">
-            <button onclick="checkPassword()">دخول</button>
-            <p id="error-msg" class="error-msg">كلمة السر غير صحيحة!</p>
-        </div>
-    </div>
-
-    <!-- عرض اللوائح فقط بخلفية داكنة -->
-    <div id="content-wrapper">
-        <div class="iframe-container">
-            <iframe id="main-frame" src=""></iframe>
-        </div>
+    <div class="login-card">
+        <h2>عرض اللوائح والقوانين</h2>
+        <input type="password" id="password-input" placeholder="أدخل كلمة السر">
+        <button onclick="checkPassword()">دخول</button>
+        <p id="error-msg" class="error-msg">كلمة السر غير صحيحة!</p>
     </div>
 
     <script>
@@ -113,13 +86,12 @@
         const RULES_URL = "https://h5.wepartytime.net/static/ly/managerCenter/index.html?uid=1134615&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODY5MzIyNzQsImlhdCI6MTc4NjMyNzQ3NCwiaXNzIjoicHR1IiwianRpIjoiNTU1MzhjODgtMjBkZi00YzQ4LTk5YTQtOTc1NGY0MTgxMzlhIiwidWlkIjoiMTEyOTI1MiJ9.rFMtX22YSICp6RbyqT9GGsMwkzCWqbfr0jX43uO7aN4&lan=ar&lang=ar#/rules";
 
         function checkPassword() {
-            const inputVal = document.getElementById('password-input').value;
+            const inputVal = document.getElementById('password-input').value.trim();
             const errorMsg = document.getElementById('error-msg');
 
             if (inputVal === SECRET_PASSWORD) {
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('content-wrapper').style.display = 'block';
-                document.getElementById('main-frame').src = RULES_URL;
+                // التوجيه المباشر للرابط لتفادي إحاطة الحظر
+                window.location.href = RULES_URL;
             } else {
                 errorMsg.style.display = 'block';
             }
@@ -128,215 +100,6 @@
         document.getElementById('password-input').addEventListener('keypress', function (e) {
             if (e.key === 'Enter') checkPassword();
         });
-    </script>
-</body>
-</html>
-        .login-card input {
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid #444;
-            border-radius: 8px;
-            font-size: 16px;
-            text-align: center;
-            background-color: #2a2a2a;
-            color: #fff;
-        }
-        .login-card input:focus { outline: none; border-color: #007bff; }
-        .login-card button {
-            width: 100%;
-            padding: 15px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-        .login-card button:hover { background-color: #0056b3; }
-        .error-msg { color: #ff6b6b; font-size: 14px; margin-top: 15px; display: none; }
-
-        /* حاوية الإطار بخلفية سوداء لإخفاء تحميل الصفحة الأصلية */
-        #content-screen {
-            display: none;
-            width: 100%;
-            height: 100vh;
-            background-color: #000;
-        }
-        
-        /* تنسيق الإطار لعرض اللوائح فقط بخلفية سوداء */
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            background-color: #000; /* خلفية سوداء للإطار */
-            color-scheme: dark; /* تلميح للمتصفح لاستخدام المظهر الداكن */
-        }
-    </style>
-</head>
-<body>
-
-    <!-- واجهة دخول كلمة السر باللون الأسود -->
-    <div id="login-screen">
-        <div class="login-card">
-            <h2>عرض اللوائح والقوانين</h2>
-            <input type="password" id="password-input" placeholder="أدخل كلمة السر">
-            <button onclick="checkPassword()">دخول</button>
-            <p id="error-msg" class="error-msg">كلمة السر غير صحيحة!</p>
-        </div>
-    </div>
-
-    <!-- واجهة عرض اللوائح فقط بأسلوب معتم -->
-    <div id="content-screen">
-        <iframe id="main-frame" src=""></iframe>
-    </div>
-
-    <script>
-        // ضع كلمة السر التي تريدها هنا
-        const SECRET_PASSWORD = "12345678"; 
-
-        // رابط يوجه مباشرة لتبويب اللوائح ويطلب تفعيل الوضع المعتم عبر المعاملات
-        const RULES_URL = "https://h5.wepartytime.net/static/ly/managerCenter/index.html?uid=1134615&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODY5MzIyNzQsImlhdCI6MTc4NjMyNzQ3NCwiaXNzIjoicHR1IiwianRpIjoiNTU1MzhjODgtMjBkZi00YzQ4LTk5YTQtOTc1NGY0MTgxMzlhIiwidWlkIjoiMTEyOTI1MiJ9.rFMtX22YSICp6RbyqT9GGsMwkzCWqbfr0jX43uO7aN4&lan=ar&lang=ar&theme=dark#/rules";
-
-        function checkPassword() {
-            const inputVal = document.getElementById('password-input').value;
-            const errorMsg = document.getElementById('error-msg');
-
-            if (inputVal === SECRET_PASSWORD) {
-                // إخفاء شاشة الدخول وعرض حاوية المحتوى السوداء
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('content-screen').style.display = 'block';
-                
-                // تحميل رابط اللوائح المظلم داخل الإطار
-                document.getElementById('main-frame').src = RULES_URL;
-            } else {
-                errorMsg.style.display = 'block';
-            }
-        }
-        
-        // السماح بالضغط على Enter لإرسال كلمة السر
-        document.getElementById('password-input').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                checkPassword();
-            }
-        });
-    </script>
-</body>
-</html>
-        .login-card button {
-            width: 100%;
-            padding: 12px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .login-card button:hover { background-color: #0056b3; }
-        .error-msg { color: #dc3545; font-size: 14px; margin-top: 10px; display: none; }
-
-        /* شاشة عرض اللوائح */
-        #content-screen { display: none; width: 100%; height: 100vh; }
-        iframe { width: 100%; height: 100%; border: none; }
-    </style>
-</head>
-<body>
-
-    <!-- واجهة دخول كلمة السر -->
-    <div id="login-screen">
-        <div class="login-card">
-            <h2>اللوائح والقوانين</h2>
-            <input type="password" id="password-input" placeholder="أدخل كلمة السر">
-            <button onclick="checkPassword()">دخول</button>
-            <p id="error-msg" class="error-msg">كلمة السر غير صحيحة!</p>
-        </div>
-    </div>
-
-    <!-- واجهة عرض اللوائح فقط -->
-    <div id="content-screen">
-        <iframe id="main-frame" src=""></iframe>
-    </div>
-
-    <script>
-        const SECRET_PASSWORD = "123456"; // ضع كلمة السر الخاصة بك هنا
-
-        // رابط يوجه مباشرة لتبويب اللوائح
-        const RULES_URL = "https://h5.wepartytime.net/static/ly/managerCenter/index.html?uid=1134615&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODY5MzIyNzQsImlhdCI6MTc4NjMyNzQ3NCwiaXNzIjoicHR1IiwianRpIjoiNTU1MzhjODgtMjBkZi00YzQ4LTk5YTQtOTc1NGY0MTgxMzlhIiwidWlkIjoiMTEyOTI1MiJ9.rFMtX22YSICp6RbyqT9GGsMwkzCWqbfr0jX43uO7aN4&lan=ar&lang=ar#/rules";
-
-        function checkPassword() {
-            const inputVal = document.getElementById('password-input').value;
-            const errorMsg = document.getElementById('error-msg');
-
-            if (inputVal === SECRET_PASSWORD) {
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('content-screen').style.display = 'block';
-                document.getElementById('main-frame').src = RULES_URL;
-            } else {
-                errorMsg.style.display = 'block';
-            }
-        }
-    </script>
-</body>
-</html>
-        .login-card button {
-            width: 100%;
-            padding: 12px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .login-card button:hover { background-color: #0056b3; }
-        .error-msg { color: #dc3545; font-size: 14px; margin-top: 10px; display: none; }
-
-        /* شاشة المحتوى */
-        #content-screen { display: none; width: 100%; height: 100vh; }
-        iframe { width: 100%; height: 100%; border: none; }
-    </style>
-</head>
-<body>
-
-    <!-- واجهة دخول كلمة السر -->
-    <div id="login-screen">
-        <div class="login-card">
-            <h2>مركز الإدارة</h2>
-            <input type="password" id="password-input" placeholder="أدخل كلمة السر">
-            <button onclick="checkPassword()">دخول</button>
-            <p id="error-msg" class="error-msg">كلمة السر غير صحيحة!</p>
-        </div>
-    </div>
-
-    <!-- واجهة عرض الرابط المخفي -->
-    <div id="content-screen">
-        <iframe id="main-frame" src=""></iframe>
-    </div>
-
-    <script>
-        // ضع كلمة السر التي تريدها هنا
-        const SECRET_PASSWORD = "1234"; 
-
-        // الرابط الأصلي المراد إخفاؤه
-        const TARGET_URL = "https://h5.wepartytime.net/static/ly/managerCenter/index.html?uid=1134615&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODY5MzIyNzQsImlhdCI6MTc4NjMyNzQ3NCwiaXNzIjoicHR1IiwianRpIjoiNTU1MzhjODgtMjBkZi00YzQ4LTk5YTQtOTc1NGY0MTgxMzlhIiwidWlkIjoiMTEyOTI1MiJ9.rFMtX22YSICp6RbyqT9GGsMwkzCWqbfr0jX43uO7aN4&lan=ar&lang=ar#/manager";
-
-        function checkPassword() {
-            const inputVal = document.getElementById('password-input').value;
-            const errorMsg = document.getElementById('error-msg');
-
-            if (inputVal === SECRET_PASSWORD) {
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('content-screen').style.display = 'block';
-                document.getElementById('main-frame').src = TARGET_URL;
-            } else {
-                errorMsg.style.display = 'block';
-            }
-        }
     </script>
 </body>
 </html>
