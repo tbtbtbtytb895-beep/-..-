@@ -20,14 +20,14 @@
             color: #ffffff;
         }
 
-        /* 1. شاشة الترحيب والواجهة المميزة */
+        /* 1. الواجهة الترحيبية */
         #welcome-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, #1a0005 0%, #000000 100%);
+            background: radial-gradient(circle at center, #2a0800 0%, #000000 100%);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -37,68 +37,66 @@
             padding: 20px;
         }
 
-        /* الاسم المتحرك وتأثير النار 🔥 */
+        /* الاسم الناري المتحرك */
         .fire-title {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 900;
-            color: #fff;
-            margin-bottom: 25px;
+            color: #ffffff;
+            margin-bottom: 30px;
             text-shadow: 
-                0 0 2px #fff,
-                0 -5px 10px #ff3300,
-                0 -10px 20px #ff6600,
-                0 -15px 30px #ff9900,
-                0 -20px 40px #ffcc00;
-            animation: fireMove 1.5s infinite alternate ease-in-out;
+                0 0 4px #fff,
+                0 -4px 8px #ff3300,
+                0 -8px 16px #ff6600,
+                0 -12px 24px #ff9900;
+            animation: firePulse 1.2s infinite alternate ease-in-out;
         }
 
-        @keyframes fireMove {
+        @keyframes firePulse {
             0% {
-                transform: translateY(0) scale(1);
-                text-shadow: 
-                    0 0 2px #fff,
-                    0 -5px 10px #ff3300,
-                    0 -10px 20px #ff6600,
-                    0 -15px 30px #ff9900,
-                    0 -20px 40px #ffcc00;
-            }
-            100% {
-                transform: translateY(-5px) scale(1.03);
+                transform: scale(1);
                 text-shadow: 
                     0 0 4px #fff,
-                    0 -8px 15px #ff0000,
-                    0 -15px 25px #ff5500,
-                    0 -22px 35px #ffaa00,
-                    0 -28px 45px #ffff00;
+                    0 -4px 8px #ff3300,
+                    0 -8px 16px #ff6600,
+                    0 -12px 24px #ff9900;
+            }
+            100% {
+                transform: scale(1.04);
+                text-shadow: 
+                    0 0 8px #fff,
+                    0 -6px 12px #ff0000,
+                    0 -12px 22px #ff5500,
+                    0 -18px 32px #ffaa00;
             }
         }
 
         .logo-box {
             border: 2px solid #ff3300;
-            border-radius: 15px;
-            padding: 20px;
-            background: rgba(15, 5, 5, 0.85);
-            box-shadow: 0 0 25px rgba(255, 51, 0, 0.4);
-            margin-bottom: 30px;
+            border-radius: 20px;
+            padding: 22px 18px;
+            background: rgba(20, 5, 0, 0.85);
+            box-shadow: 0 0 30px rgba(255, 51, 0, 0.35);
+            margin-bottom: 35px;
             max-width: 90%;
         }
 
         .slogan {
-            font-size: 18px;
-            color: #f0f0f0;
-            line-height: 1.6;
+            font-size: 17px;
+            color: #f5f5f5;
+            line-height: 1.7;
+            font-weight: 500;
         }
 
         .start-btn {
-            background: linear-gradient(90deg, #ff3300, #ff6600);
-            color: #fff;
+            background: linear-gradient(90deg, #ff3300, #d60000);
+            color: #ffffff;
             border: none;
-            padding: 14px 40px;
+            padding: 15px 45px;
             font-size: 18px;
             font-weight: bold;
             border-radius: 30px;
             cursor: pointer;
-            box-shadow: 0 0 20px rgba(255, 51, 0, 0.6);
+            box-shadow: 0 0 25px rgba(255, 51, 0, 0.5);
             transition: transform 0.2s;
         }
 
@@ -106,7 +104,7 @@
             transform: scale(0.95);
         }
 
-        /* 2. شاشة كلمة السر */
+        /* 2. شاشة قفل كلمة السر */
         #login-screen {
             position: fixed;
             top: 0;
@@ -121,13 +119,14 @@
         }
 
         .login-card {
-            background-color: #0d0d0d;
+            background-color: #0a0a0a;
             padding: 35px 25px;
-            border-radius: 16px;
+            border-radius: 18px;
             text-align: center;
             width: 90%;
-            max-width: 360px;
+            max-width: 350px;
             border: 1px solid #222222;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
         }
 
         .login-card h3 {
@@ -141,10 +140,10 @@
             padding: 14px;
             margin-bottom: 20px;
             border: 1px solid #333333;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 16px;
             text-align: center;
-            background-color: #1a1a1a;
+            background-color: #141414;
             color: #ffffff;
             outline: none;
         }
@@ -155,7 +154,7 @@
             background: linear-gradient(90deg, #ff3300, #990000);
             color: #ffffff;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 16px;
             cursor: pointer;
             font-weight: bold;
@@ -168,7 +167,7 @@
             display: none;
         }
 
-        /* 3. حاوية العرض وتوسيع اللوائح بالمنتصف */
+        /* 3. حاوية العرض المتناسقة مع تكبير وتوسيط اللوائح */
         #content-wrapper {
             display: none;
             width: 100vw;
@@ -186,15 +185,14 @@
             height: calc(100vh + 210px);
             border: none;
             background-color: #000000;
-            /* توسيط المحتوى وتصغيره ليظهر تبويب اللوائح بالمنتصف تماماً */
-            transform: translateX(-50%) scale(0.85);
+            transform: translateX(-50%) scale(1.15);
             transform-origin: top center;
         }
     </style>
 </head>
 <body>
 
-    <!-- 1. شاشة الترحيب المميزة والاسم الناري -->
+    <!-- 1. شاشة الترحيب -->
     <div id="welcome-screen">
         <h1 class="fire-title">لوحه تحكم فـ✗ـوضـوي..❵ 🔥</h1>
         
@@ -215,19 +213,22 @@
         </div>
     </div>
 
-    <!-- 3. شاشة عرض اللوائح -->
+    <!-- 3. شاشة العرض الرئيسية -->
     <div id="content-wrapper">
         <iframe id="main-frame" src="" allowfullscreen></iframe>
     </div>
 
     <script>
-        const SECRET_PASSWORD = "فـ✗ـوضـوي..❵";
+        // كلمة السر الافتراضية
+        const SECRET_PASSWORD = "999002";
 
+        // الرابط المباشر للمحتوى
         const RULES_URL = "https://h5.wepartytime.net/static/ly/managerCenter/index.html?uid=1134615&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODY5MzIyNzQsImlhdCI6MTc4NjMyNzQ3NCwiaXNzIjoicHR1IiwianRpIjoiNTU1MzhjODgtMjBkZi00YzQ4LTk5YTQtOTc1NGY0MTgxMzlhIiwidWlkIjoiMTEyOTI1MiJ9.rFMtX22YSICp6RbyqT9GGsMwkzCWqbfr0jX43uO7aN4&lan=ar&lang=ar#/rules";
 
         function goToLogin() {
             document.getElementById('welcome-screen').style.display = 'none';
             document.getElementById('login-screen').style.display = 'flex';
+            document.getElementById('password-input').focus();
         }
 
         function checkPassword() {
